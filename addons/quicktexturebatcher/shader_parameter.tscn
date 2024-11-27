@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://bacl4oequehqx"]
+
+[node name="Shader Parameter" type="HBoxContainer"]
+
+[node name="LineEdit" type="LineEdit" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "albedo_texture"
+expand_to_text_length = true
+
+[node name="LineEdit2" type="LineEdit" parent="."]
+layout_mode = 2
+size_flags_horizontal = 8
+text = "_BC"
+alignment = 1
+
+[node name="Button" type="Button" parent="."]
+custom_minimum_size = Vector2(35, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_font_sizes/font_size = 20
+text = "-
+"
+
+[node name="VSeparator" type="VSeparator" parent="."]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_constants/separation = 10
