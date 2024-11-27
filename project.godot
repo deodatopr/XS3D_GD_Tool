@@ -20,7 +20,7 @@ project/assembly_name="XS3D_GD_Tool"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/3DAutoMaterial/plugin.cfg", "res://addons/quicktexturebatcher/plugin.cfg")
+enabled=PackedStringArray("res://addons/3DAutoMap/plugin.cfg", "res://addons/quicktexturebatcher/plugin.cfg")
 
 [rendering]
 
