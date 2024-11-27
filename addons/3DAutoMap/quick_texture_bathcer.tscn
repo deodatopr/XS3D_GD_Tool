@@ -1,15 +1,19 @@
-[gd_scene load_steps=2 format=3 uid="uid://cwj1co1agaoer"]
+[gd_scene load_steps=3 format=3 uid="uid://cwj1co1agaoer"]
 
+[ext_resource type="Script" path="res://addons/3DAutoMap/AutoMap.gd" id="1_dppo3"]
 [ext_resource type="PackedScene" uid="uid://bacl4oequehqx" path="res://addons/3DAutoMap/shader_parameter.tscn" id="1_go18k"]
 
-[node name="[ AUTO MAP ]" type="Control"]
+[node name="[ AUTO MAP ]" type="Control" node_paths=PackedStringArray("ApplyStandardMat", "ApplyShaderMat")]
 layout_mode = 3
-anchor_right = 0.217
-anchor_bottom = 0.801
-offset_right = 0.0159912
-offset_bottom = 2.95197
+anchor_right = 0.234
+anchor_bottom = 0.671
+offset_right = 0.431976
+offset_bottom = 0.191986
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_dppo3")
+ApplyStandardMat = NodePath("TabContainer/Standard Mat/ScrollContainer/MarginContainer/VBoxContainer/ApplyStandard")
+ApplyShaderMat = NodePath("TabContainer/Shader Mat/ScrollContainer/MarginContainer/VBoxContainer/ApplyShader")
 
 [node name="TabContainer" type="TabContainer" parent="."]
 layout_mode = 1
@@ -58,6 +62,7 @@ horizontal_alignment = 1
 layout_mode = 2
 text = "Texture Name Struct:"
 vertical_alignment = 1
+uppercase = true
 
 [node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/Standard Mat/ScrollContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -99,10 +104,44 @@ popup/item_2/id = 2
 popup/item_3/text = "TGA"
 popup/item_3/id = 3
 
+[node name="HBoxContainer9" type="HBoxContainer" parent="TabContainer/Standard Mat/ScrollContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+alignment = 1
+
+[node name="LineEdit" type="LineEdit" parent="TabContainer/Standard Mat/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer9"]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_uneditable_color = Color(0, 0.952577, 0.911258, 1)
+theme_override_font_sizes/font_size = 10
+text = "Map_Sec4_"
+alignment = 2
+editable = false
+
+[node name="LineEdit2" type="LineEdit" parent="TabContainer/Standard Mat/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer9"]
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_colors/font_uneditable_color = Color(1, 0.689999, 0.517537, 1)
+theme_override_font_sizes/font_size = 10
+text = "1000"
+alignment = 1
+editable = false
+
+[node name="LineEdit3" type="LineEdit" parent="TabContainer/Standard Mat/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer9"]
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_colors/font_uneditable_color = Color(1, 0.796926, 0, 1)
+theme_override_font_sizes/font_size = 10
+text = ".JPG"
+editable = false
+
 [node name="HSeparator" type="HSeparator" parent="TabContainer/Standard Mat/ScrollContainer/MarginContainer/VBoxContainer"]
 modulate = Color(1, 1, 1, 0)
 layout_mode = 2
-theme_override_constants/separation = 25
+theme_override_constants/separation = 15
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="TabContainer/Standard Mat/ScrollContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -113,6 +152,7 @@ alignment = 2
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Map Connect:"
+uppercase = true
 
 [node name="Panel" type="Panel" parent="TabContainer/Standard Mat/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer2"]
 self_modulate = Color(1, 1, 1, 0)
@@ -135,6 +175,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 10
 text = "Suffix"
+uppercase = true
 
 [node name="HBoxContainer3" type="HBoxContainer" parent="TabContainer/Standard Mat/ScrollContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -142,7 +183,9 @@ size_flags_vertical = 8
 alignment = 2
 
 [node name="CheckBox" type="CheckBox" parent="TabContainer/Standard Mat/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer3"]
+custom_minimum_size = Vector2(0, 25)
 layout_mode = 2
+theme_override_font_sizes/font_size = 10
 text = "Base Color"
 
 [node name="Panel" type="Panel" parent="TabContainer/Standard Mat/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer3"]
@@ -165,7 +208,7 @@ offset_right = 33.5313
 offset_bottom = 15.5
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_font_sizes/font_size = 12
+theme_override_font_sizes/font_size = 10
 text = "_BC"
 alignment = 1
 
@@ -175,7 +218,9 @@ size_flags_vertical = 8
 alignment = 2
 
 [node name="CheckBox" type="CheckBox" parent="TabContainer/Standard Mat/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer4"]
+custom_minimum_size = Vector2(0, 25)
 layout_mode = 2
+theme_override_font_sizes/font_size = 10
 text = "Roughness"
 
 [node name="Panel" type="Panel" parent="TabContainer/Standard Mat/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer4"]
@@ -198,7 +243,7 @@ offset_right = 33.5313
 offset_bottom = 15.5
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_font_sizes/font_size = 12
+theme_override_font_sizes/font_size = 10
 text = "_R"
 alignment = 1
 
@@ -208,7 +253,9 @@ size_flags_vertical = 8
 alignment = 2
 
 [node name="CheckBox" type="CheckBox" parent="TabContainer/Standard Mat/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer5"]
+custom_minimum_size = Vector2(0, 25)
 layout_mode = 2
+theme_override_font_sizes/font_size = 10
 text = "Metallic"
 
 [node name="Panel" type="Panel" parent="TabContainer/Standard Mat/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer5"]
@@ -231,7 +278,7 @@ offset_right = 33.5313
 offset_bottom = 15.5
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_font_sizes/font_size = 12
+theme_override_font_sizes/font_size = 10
 text = "_M"
 alignment = 1
 
@@ -241,7 +288,9 @@ size_flags_vertical = 8
 alignment = 2
 
 [node name="CheckBox" type="CheckBox" parent="TabContainer/Standard Mat/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer6"]
+custom_minimum_size = Vector2(0, 25)
 layout_mode = 2
+theme_override_font_sizes/font_size = 10
 text = "Normal"
 
 [node name="Panel" type="Panel" parent="TabContainer/Standard Mat/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer6"]
@@ -264,7 +313,7 @@ offset_right = 33.5313
 offset_bottom = 15.5
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_font_sizes/font_size = 12
+theme_override_font_sizes/font_size = 10
 text = "_N"
 alignment = 1
 
@@ -274,7 +323,9 @@ size_flags_vertical = 8
 alignment = 2
 
 [node name="CheckBox" type="CheckBox" parent="TabContainer/Standard Mat/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer7"]
+custom_minimum_size = Vector2(0, 25)
 layout_mode = 2
+theme_override_font_sizes/font_size = 10
 text = "Emission"
 
 [node name="Panel" type="Panel" parent="TabContainer/Standard Mat/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer7"]
@@ -297,7 +348,7 @@ offset_right = 33.5313
 offset_bottom = 15.5
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_font_sizes/font_size = 12
+theme_override_font_sizes/font_size = 10
 text = "_E"
 alignment = 1
 
@@ -307,7 +358,9 @@ size_flags_vertical = 8
 alignment = 2
 
 [node name="CheckBox" type="CheckBox" parent="TabContainer/Standard Mat/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer8"]
+custom_minimum_size = Vector2(0, 25)
 layout_mode = 2
+theme_override_font_sizes/font_size = 10
 text = "Occlusion"
 
 [node name="Panel" type="Panel" parent="TabContainer/Standard Mat/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer8"]
@@ -330,73 +383,20 @@ offset_right = 33.5313
 offset_bottom = 15.5
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_font_sizes/font_size = 12
+theme_override_font_sizes/font_size = 10
 text = "_O"
 alignment = 1
 
 [node name="HSeparator2" type="HSeparator" parent="TabContainer/Standard Mat/ScrollContainer/MarginContainer/VBoxContainer"]
 modulate = Color(1, 1, 1, 0)
 layout_mode = 2
-theme_override_constants/separation = 25
-
-[node name="ColorRect" type="ColorRect" parent="TabContainer/Standard Mat/ScrollContainer/MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 37.58)
-layout_mode = 2
-color = Color(1, 1, 1, 0.207843)
-
-[node name="HBoxContainer9" type="HBoxContainer" parent="TabContainer/Standard Mat/ScrollContainer/MarginContainer/VBoxContainer/ColorRect"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -122.5
-offset_top = -15.5
-offset_right = 122.5
-offset_bottom = 15.5
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/separation = 0
-alignment = 1
-
-[node name="LineEdit" type="LineEdit" parent="TabContainer/Standard Mat/ScrollContainer/MarginContainer/VBoxContainer/ColorRect/HBoxContainer9"]
-custom_minimum_size = Vector2(120, 0)
-layout_mode = 2
-theme_override_colors/font_uneditable_color = Color(0, 0.952577, 0.911258, 1)
-theme_override_font_sizes/font_size = 10
-text = "Map_Sec4_"
-alignment = 1
-editable = false
-
-[node name="LineEdit2" type="LineEdit" parent="TabContainer/Standard Mat/ScrollContainer/MarginContainer/VBoxContainer/ColorRect/HBoxContainer9"]
-custom_minimum_size = Vector2(40, 0)
-layout_mode = 2
-theme_override_colors/font_uneditable_color = Color(1, 0.689999, 0.517537, 1)
-theme_override_font_sizes/font_size = 10
-text = "1000"
-alignment = 1
-editable = false
-
-[node name="LineEdit3" type="LineEdit" parent="TabContainer/Standard Mat/ScrollContainer/MarginContainer/VBoxContainer/ColorRect/HBoxContainer9"]
-custom_minimum_size = Vector2(40, 0)
-layout_mode = 2
-theme_override_colors/font_uneditable_color = Color(1, 0.796926, 0, 1)
-theme_override_font_sizes/font_size = 10
-text = ".JPG"
-alignment = 1
-editable = false
-
-[node name="HSeparator3" type="HSeparator" parent="TabContainer/Standard Mat/ScrollContainer/MarginContainer/VBoxContainer"]
-modulate = Color(1, 1, 1, 0)
-layout_mode = 2
-theme_override_constants/separation = 15
+theme_override_constants/separation = 10
 
 [node name="ApplyStandard" type="Button" parent="TabContainer/Standard Mat/ScrollContainer/MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(110, 40)
 layout_mode = 2
 size_flags_vertical = 8
-text = "Apply"
+text = "APPLY"
 
 [node name="Shader Mat" type="Panel" parent="TabContainer"]
 layout_mode = 2
@@ -427,6 +427,7 @@ size_flags_horizontal = 3
 layout_mode = 2
 text = "Texture Name Struct:"
 vertical_alignment = 1
+uppercase = true
 
 [node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/Shader Mat/ScrollContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -468,10 +469,44 @@ popup/item_2/id = 2
 popup/item_3/text = "TGA"
 popup/item_3/id = 3
 
+[node name="HBoxContainer9" type="HBoxContainer" parent="TabContainer/Shader Mat/ScrollContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+alignment = 1
+
+[node name="LineEdit" type="LineEdit" parent="TabContainer/Shader Mat/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer9"]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_uneditable_color = Color(0, 0.952577, 0.911258, 1)
+theme_override_font_sizes/font_size = 10
+text = "Map_Sec4_"
+alignment = 2
+editable = false
+
+[node name="LineEdit2" type="LineEdit" parent="TabContainer/Shader Mat/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer9"]
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_colors/font_uneditable_color = Color(1, 0.689999, 0.517537, 1)
+theme_override_font_sizes/font_size = 10
+text = "1000"
+alignment = 1
+editable = false
+
+[node name="LineEdit3" type="LineEdit" parent="TabContainer/Shader Mat/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer9"]
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_colors/font_uneditable_color = Color(1, 0.796926, 0, 1)
+theme_override_font_sizes/font_size = 10
+text = ".JPG"
+editable = false
+
 [node name="HSeparator" type="HSeparator" parent="TabContainer/Shader Mat/ScrollContainer/MarginContainer/VBoxContainer"]
 modulate = Color(1, 1, 1, 0)
 layout_mode = 2
-theme_override_constants/separation = 25
+theme_override_constants/separation = 15
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="TabContainer/Shader Mat/ScrollContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -481,25 +516,27 @@ layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 10
 text = "Shader Parameter:"
+uppercase = true
 
 [node name="Label2" type="Label" parent="TabContainer/Shader Mat/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(107, 0)
 layout_mode = 2
-size_flags_horizontal = 2
+size_flags_horizontal = 10
 theme_override_font_sizes/font_size = 10
-text = "Map Suffix"
+text = "   Map Suffix"
+uppercase = true
 
 [node name="Panel" type="Panel" parent="TabContainer/Shader Mat/ScrollContainer/MarginContainer/VBoxContainer"]
 self_modulate = Color(1, 1, 1, 0)
-custom_minimum_size = Vector2(0, 207.63)
+custom_minimum_size = Vector2(0, 150)
 layout_mode = 2
+size_flags_vertical = 0
 
 [node name="ScrollContainer" type="ScrollContainer" parent="TabContainer/Shader Mat/ScrollContainer/MarginContainer/VBoxContainer/Panel"]
 layout_mode = 1
-anchors_preset = -1
-anchor_right = 1.009
+anchors_preset = 15
+anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = 0.019989
-offset_bottom = 0.369995
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -537,96 +574,20 @@ layout_mode = 2
 theme_override_constants/separation = 10
 
 [node name="AddElement" type="Button" parent="TabContainer/Shader Mat/ScrollContainer/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
-text = "Add Element"
+size_flags_horizontal = 8
+theme_override_colors/font_color = Color(0, 0.73534, 0.040574, 1)
+theme_override_font_sizes/font_size = 10
+text = " ADD PARAMETER "
 
 [node name="HSeparator4" type="HSeparator" parent="TabContainer/Shader Mat/ScrollContainer/MarginContainer/VBoxContainer"]
 modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 theme_override_constants/separation = 10
 
-[node name="ColorRect" type="ColorRect" parent="TabContainer/Shader Mat/ScrollContainer/MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 160)
-layout_mode = 2
-color = Color(1, 1, 1, 0.207843)
-
-[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/Shader Mat/ScrollContainer/MarginContainer/VBoxContainer/ColorRect"]
-layout_mode = 1
-anchors_preset = 14
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_top = -63.0
-offset_bottom = 63.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Label" type="Label" parent="TabContainer/Shader Mat/ScrollContainer/MarginContainer/VBoxContainer/ColorRect/VBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_font_sizes/font_size = 15
-text = "Texture Struct"
-horizontal_alignment = 1
-
-[node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/Shader Mat/ScrollContainer/MarginContainer/VBoxContainer/ColorRect/VBoxContainer"]
-layout_mode = 2
-
-[node name="LineEdit" type="LineEdit" parent="TabContainer/Shader Mat/ScrollContainer/MarginContainer/VBoxContainer/ColorRect/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_colors/font_uneditable_color = Color(0, 0.952577, 0.911258, 1)
-theme_override_font_sizes/font_size = 10
-text = "Map_Sec4_"
-alignment = 1
-editable = false
-
-[node name="LineEdit2" type="LineEdit" parent="TabContainer/Shader Mat/ScrollContainer/MarginContainer/VBoxContainer/ColorRect/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_colors/font_uneditable_color = Color(1, 0.689999, 0.517537, 1)
-theme_override_font_sizes/font_size = 10
-text = "1000"
-alignment = 1
-editable = false
-
-[node name="LineEdit3" type="LineEdit" parent="TabContainer/Shader Mat/ScrollContainer/MarginContainer/VBoxContainer/ColorRect/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_colors/font_uneditable_color = Color(1, 0.796926, 0, 1)
-theme_override_font_sizes/font_size = 10
-text = ".JPG"
-alignment = 1
-editable = false
-
-[node name="Label2" type="Label" parent="TabContainer/Shader Mat/ScrollContainer/MarginContainer/VBoxContainer/ColorRect/VBoxContainer"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 15
-text = "\\/"
-horizontal_alignment = 1
-
-[node name="Label3" type="Label" parent="TabContainer/Shader Mat/ScrollContainer/MarginContainer/VBoxContainer/ColorRect/VBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_font_sizes/font_size = 15
-text = "Shader Parameter"
-horizontal_alignment = 1
-
-[node name="LineEdit2" type="LineEdit" parent="TabContainer/Shader Mat/ScrollContainer/MarginContainer/VBoxContainer/ColorRect/VBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_font_sizes/font_size = 10
-text = "albedo_texture"
-alignment = 1
-editable = false
-
-[node name="HSeparator3" type="HSeparator" parent="TabContainer/Shader Mat/ScrollContainer/MarginContainer/VBoxContainer"]
-modulate = Color(1, 1, 1, 0)
-layout_mode = 2
-theme_override_constants/separation = 15
-
 [node name="ApplyShader" type="Button" parent="TabContainer/Shader Mat/ScrollContainer/MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(110, 40)
 layout_mode = 2
 size_flags_vertical = 8
-text = "Apply"
+text = "APPLY"
