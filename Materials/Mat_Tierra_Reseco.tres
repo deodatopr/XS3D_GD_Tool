@@ -1,0 +1,7 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://d1txfqs1y7kxy"]
+
+[ext_resource type="Texture2D" uid="uid://c3rj31pgnq4xw" path="res://Materials/Map_Tierra_Reseco_A.jpg" id="1_xsup6"]
+
+[resource]
+albedo_texture = ExtResource("1_xsup6")
+roughness = 0.7

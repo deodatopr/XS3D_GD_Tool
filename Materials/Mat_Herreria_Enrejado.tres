@@ -1,0 +1,13 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://cd7xl403bjlhk"]
+
+[ext_resource type="Texture2D" uid="uid://ccb27gympp05t" path="res://Materials/Map_Reja.png" id="1_ev8k0"]
+
+[resource]
+transparency = 2
+alpha_scissor_threshold = 0.5
+alpha_antialiasing_mode = 0
+albedo_color = Color(0.746586, 0.746586, 0.746586, 1)
+albedo_texture = ExtResource("1_ev8k0")
+metallic = 1.0
+roughness = 0.53
+uv1_scale = Vector3(0.4, 0.4, 0.4)

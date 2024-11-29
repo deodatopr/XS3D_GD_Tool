@@ -1,0 +1,8 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://c1w7isvffqjiy"]
+
+[ext_resource type="Texture2D" uid="uid://c5sgnvhfu7tl1" path="res://Materials/Test.jpg" id="1_kmg0t"]
+
+[resource]
+albedo_color = Color(0.712574, 0.712574, 0.712574, 1)
+albedo_texture = ExtResource("1_kmg0t")
+roughness = 0.8

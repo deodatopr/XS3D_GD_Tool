@@ -1,0 +1,9 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://dv75yqdhl56o6"]
+
+[ext_resource type="Texture2D" uid="uid://lm38cv848h7k" path="res://Materials/Map_Enjarrado_A.jpg" id="1_gv1c0"]
+
+[resource]
+vertex_color_use_as_albedo = true
+albedo_color = Color(0.690082, 0.690082, 0.690082, 1)
+albedo_texture = ExtResource("1_gv1c0")
+roughness = 0.8

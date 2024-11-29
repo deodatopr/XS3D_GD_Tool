@@ -1,0 +1,10 @@
+[gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://bsty5ar732nkd"]
+
+[ext_resource type="Texture2D" uid="uid://i2oek6savpbh" path="res://Materials/Map_Calle_AsfaltoV2_BC.jpg" id="1_o74yc"]
+[ext_resource type="Texture2D" uid="uid://br48r4u51i801" path="res://Materials/Map_Calle_AsfaltoV2_N.jpg" id="2_g3f7v"]
+
+[resource]
+albedo_texture = ExtResource("1_o74yc")
+roughness_texture = ExtResource("1_o74yc")
+normal_enabled = true
+normal_texture = ExtResource("2_g3f7v")

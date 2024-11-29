@@ -1,0 +1,7 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://dgvq8nammg8mg"]
+
+[ext_resource type="Texture2D" uid="uid://dd58iev0xtfut" path="res://Materials/Map_Escavado_Ligero_A.jpg" id="1_buojh"]
+
+[resource]
+albedo_texture = ExtResource("1_buojh")
+roughness_texture_channel = 3

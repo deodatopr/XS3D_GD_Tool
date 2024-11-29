@@ -1,0 +1,12 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://d3brwk0u65ufv"]
+
+[ext_resource type="Texture2D" uid="uid://bqvuxc7a8v0q1" path="res://Materials/Map_Herreria_Reja.png" id="1_f8o5i"]
+
+[resource]
+transparency = 2
+alpha_scissor_threshold = 0.5
+alpha_antialiasing_mode = 0
+cull_mode = 2
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("1_f8o5i")
+roughness = 0.2

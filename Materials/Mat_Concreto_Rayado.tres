@@ -1,0 +1,8 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://cd15ur5nsnjj0"]
+
+[ext_resource type="Texture2D" uid="uid://clgd0oocqygfy" path="res://Materials/Map_ConcretoRayado.png" id="1_2tvuj"]
+
+[resource]
+albedo_color = Color(0.789101, 0.789101, 0.789101, 1)
+albedo_texture = ExtResource("1_2tvuj")
+roughness = 0.85

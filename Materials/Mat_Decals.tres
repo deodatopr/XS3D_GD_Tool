@@ -1,0 +1,15 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://l65wdwt2q1tr"]
+
+[ext_resource type="Texture2D" uid="uid://b2ulvoef32k2e" path="res://CONTENT/Mapa3D/Dron/Map_Dron_Decals.png" id="1_xkrt7"]
+
+[resource]
+transparency = 3
+alpha_hash_scale = 1.0
+alpha_antialiasing_mode = 0
+albedo_color = Color(0.5, 0.5, 0.5, 1)
+albedo_texture = ExtResource("1_xkrt7")
+emission_on_uv2 = true
+proximity_fade_distance = 4096.0
+distance_fade_mode = 2
+distance_fade_min_distance = 1400.0
+distance_fade_max_distance = 900.0

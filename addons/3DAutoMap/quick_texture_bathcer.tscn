@@ -1,9 +1,15 @@
-[gd_scene load_steps=3 format=3 uid="uid://cwj1co1agaoer"]
+[gd_scene load_steps=6 format=3 uid="uid://cwj1co1agaoer"]
 
 [ext_resource type="Script" path="res://addons/3DAutoMap/AutoMap.gd" id="1_dppo3"]
 [ext_resource type="PackedScene" uid="uid://bacl4oequehqx" path="res://addons/3DAutoMap/shader_parameter.tscn" id="1_go18k"]
 
-[node name="[ AUTO MAP ]" type="Control" node_paths=PackedStringArray("ApplyStandardMat", "ApplyShaderMat")]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_prcn5"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_h0jyk"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5b2h2"]
+
+[node name="[ AUTO MAP ]" type="Control" node_paths=PackedStringArray("ApplyStandardMat", "ApplyShaderMat", "BaseColor", "Roughness", "Metallic", "Normal", "Emission", "Occlusion", "NameTexture", "NumMaterials", "Extension", "SuffBC", "SuffR", "SuffM", "SuffN", "SuffE", "SuffO")]
 layout_mode = 3
 anchor_right = 0.234
 anchor_bottom = 0.671
@@ -14,6 +20,21 @@ grow_vertical = 2
 script = ExtResource("1_dppo3")
 ApplyStandardMat = NodePath("TabContainer/Standard Mat/ScrollContainer/MarginContainer/VBoxContainer/ApplyStandard")
 ApplyShaderMat = NodePath("TabContainer/Shader Mat/ScrollContainer/MarginContainer/VBoxContainer/ApplyShader")
+BaseColor = NodePath("TabContainer/Standard Mat/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer3/CheckBox")
+Roughness = NodePath("TabContainer/Standard Mat/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer4/CheckBox")
+Metallic = NodePath("TabContainer/Standard Mat/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer5/CheckBox")
+Normal = NodePath("TabContainer/Standard Mat/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer6/CheckBox")
+Emission = NodePath("TabContainer/Standard Mat/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer7/CheckBox")
+Occlusion = NodePath("TabContainer/Standard Mat/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer8/CheckBox")
+NameTexture = NodePath("TabContainer/Standard Mat/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer/LineEdit")
+NumMaterials = NodePath("TabContainer/Standard Mat/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer/OptionButton")
+Extension = NodePath("TabContainer/Standard Mat/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer/OptionButton2")
+SuffBC = NodePath("TabContainer/Standard Mat/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer3/Panel/LineEdit")
+SuffR = NodePath("TabContainer/Standard Mat/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer4/Panel/LineEdit")
+SuffM = NodePath("TabContainer/Standard Mat/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer5/Panel/LineEdit")
+SuffN = NodePath("TabContainer/Standard Mat/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer6/Panel/LineEdit")
+SuffE = NodePath("TabContainer/Standard Mat/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer7/Panel/LineEdit")
+SuffO = NodePath("TabContainer/Standard Mat/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer8/Panel/LineEdit")
 
 [node name="TabContainer" type="TabContainer" parent="."]
 layout_mode = 1
@@ -23,10 +44,9 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_vertical = 3
-current_tab = 1
+current_tab = 0
 
 [node name="Standard Mat" type="Panel" parent="TabContainer"]
-visible = false
 layout_mode = 2
 metadata/_tab_index = 0
 
@@ -55,7 +75,7 @@ size_flags_horizontal = 3
 layout_mode = 2
 theme_override_colors/font_color = Color(0.243696, 0.90732, 0, 1)
 theme_override_font_sizes/font_size = 10
-text = "[ Select 'Matirial(s)' from 'FileSystem' ]"
+text = "[ Select 'Material(s)' from 'FileSystem' ]"
 horizontal_alignment = 1
 
 [node name="Label" type="Label" parent="TabContainer/Standard Mat/ScrollContainer/MarginContainer/VBoxContainer"]
@@ -79,16 +99,16 @@ layout_mode = 2
 size_flags_horizontal = 8
 theme_override_colors/font_color = Color(1, 0.689999, 0.517537, 1)
 selected = 0
-item_count = 5
+item_count = 4
 popup/item_0/text = "# Mat"
+popup/item_0/disabled = true
+popup/item_0/separator = true
 popup/item_1/text = "NONE"
 popup/item_1/id = 4
-popup/item_2/text = "0-9"
-popup/item_2/id = 1
-popup/item_3/text = "0-99"
-popup/item_3/id = 2
-popup/item_4/text = "0-999"
-popup/item_4/id = 3
+popup/item_2/text = "0-99"
+popup/item_2/id = 2
+popup/item_3/text = "0-999"
+popup/item_3/id = 3
 
 [node name="OptionButton2" type="OptionButton" parent="TabContainer/Standard Mat/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
@@ -97,6 +117,8 @@ theme_override_colors/font_color = Color(1, 0.796926, 0, 1)
 selected = 0
 item_count = 4
 popup/item_0/text = ".Ext"
+popup/item_0/disabled = true
+popup/item_0/separator = true
 popup/item_1/text = "JPG"
 popup/item_1/id = 1
 popup/item_2/text = "PNG"
@@ -115,9 +137,17 @@ layout_mode = 2
 size_flags_horizontal = 3
 theme_override_colors/font_uneditable_color = Color(0, 0.952577, 0.911258, 1)
 theme_override_font_sizes/font_size = 10
+theme_override_styles/focus = SubResource("StyleBoxEmpty_prcn5")
 text = "Map_Sec4_"
 alignment = 2
 editable = false
+context_menu_enabled = false
+virtual_keyboard_enabled = false
+shortcut_keys_enabled = false
+middle_mouse_paste_enabled = false
+selecting_enabled = false
+deselect_on_focus_loss_enabled = false
+drag_and_drop_selection_enabled = false
 
 [node name="LineEdit2" type="LineEdit" parent="TabContainer/Standard Mat/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer9"]
 custom_minimum_size = Vector2(40, 0)
@@ -125,9 +155,17 @@ layout_mode = 2
 size_flags_horizontal = 8
 theme_override_colors/font_uneditable_color = Color(1, 0.689999, 0.517537, 1)
 theme_override_font_sizes/font_size = 10
+theme_override_styles/focus = SubResource("StyleBoxEmpty_prcn5")
 text = "1000"
 alignment = 1
 editable = false
+context_menu_enabled = false
+virtual_keyboard_enabled = false
+shortcut_keys_enabled = false
+middle_mouse_paste_enabled = false
+selecting_enabled = false
+deselect_on_focus_loss_enabled = false
+drag_and_drop_selection_enabled = false
 
 [node name="LineEdit3" type="LineEdit" parent="TabContainer/Standard Mat/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer9"]
 custom_minimum_size = Vector2(40, 0)
@@ -135,8 +173,16 @@ layout_mode = 2
 size_flags_horizontal = 8
 theme_override_colors/font_uneditable_color = Color(1, 0.796926, 0, 1)
 theme_override_font_sizes/font_size = 10
+theme_override_styles/focus = SubResource("StyleBoxEmpty_prcn5")
 text = ".JPG"
 editable = false
+context_menu_enabled = false
+virtual_keyboard_enabled = false
+shortcut_keys_enabled = false
+middle_mouse_paste_enabled = false
+selecting_enabled = false
+deselect_on_focus_loss_enabled = false
+drag_and_drop_selection_enabled = false
 
 [node name="HSeparator" type="HSeparator" parent="TabContainer/Standard Mat/ScrollContainer/MarginContainer/VBoxContainer"]
 modulate = Color(1, 1, 1, 0)
@@ -399,6 +445,7 @@ size_flags_vertical = 8
 text = "APPLY"
 
 [node name="Shader Mat" type="Panel" parent="TabContainer"]
+visible = false
 layout_mode = 2
 metadata/_tab_index = 1
 
@@ -444,16 +491,16 @@ layout_mode = 2
 size_flags_horizontal = 8
 theme_override_colors/font_color = Color(1, 0.689999, 0.517537, 1)
 selected = 0
-item_count = 5
+item_count = 4
 popup/item_0/text = "# Mat"
+popup/item_0/disabled = true
+popup/item_0/separator = true
 popup/item_1/text = "NONE"
 popup/item_1/id = 4
-popup/item_2/text = "0-9"
-popup/item_2/id = 1
-popup/item_3/text = "0-99"
-popup/item_3/id = 2
-popup/item_4/text = "0-999"
-popup/item_4/id = 3
+popup/item_2/text = "0-99"
+popup/item_2/id = 2
+popup/item_3/text = "0-999"
+popup/item_3/id = 3
 
 [node name="OptionButton2" type="OptionButton" parent="TabContainer/Shader Mat/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
@@ -462,6 +509,8 @@ theme_override_colors/font_color = Color(1, 0.796926, 0, 1)
 selected = 0
 item_count = 4
 popup/item_0/text = ".Ext"
+popup/item_0/disabled = true
+popup/item_0/separator = true
 popup/item_1/text = "JPG"
 popup/item_1/id = 1
 popup/item_2/text = "PNG"
@@ -480,9 +529,17 @@ layout_mode = 2
 size_flags_horizontal = 3
 theme_override_colors/font_uneditable_color = Color(0, 0.952577, 0.911258, 1)
 theme_override_font_sizes/font_size = 10
+theme_override_styles/focus = SubResource("StyleBoxEmpty_h0jyk")
 text = "Map_Sec4_"
 alignment = 2
 editable = false
+context_menu_enabled = false
+virtual_keyboard_enabled = false
+shortcut_keys_enabled = false
+middle_mouse_paste_enabled = false
+selecting_enabled = false
+deselect_on_focus_loss_enabled = false
+drag_and_drop_selection_enabled = false
 
 [node name="LineEdit2" type="LineEdit" parent="TabContainer/Shader Mat/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer9"]
 custom_minimum_size = Vector2(40, 0)
@@ -490,9 +547,17 @@ layout_mode = 2
 size_flags_horizontal = 8
 theme_override_colors/font_uneditable_color = Color(1, 0.689999, 0.517537, 1)
 theme_override_font_sizes/font_size = 10
+theme_override_styles/focus = SubResource("StyleBoxEmpty_5b2h2")
 text = "1000"
 alignment = 1
 editable = false
+context_menu_enabled = false
+virtual_keyboard_enabled = false
+shortcut_keys_enabled = false
+middle_mouse_paste_enabled = false
+selecting_enabled = false
+deselect_on_focus_loss_enabled = false
+drag_and_drop_selection_enabled = false
 
 [node name="LineEdit3" type="LineEdit" parent="TabContainer/Shader Mat/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer9"]
 custom_minimum_size = Vector2(40, 0)
@@ -500,8 +565,16 @@ layout_mode = 2
 size_flags_horizontal = 8
 theme_override_colors/font_uneditable_color = Color(1, 0.796926, 0, 1)
 theme_override_font_sizes/font_size = 10
+theme_override_styles/focus = SubResource("StyleBoxEmpty_5b2h2")
 text = ".JPG"
 editable = false
+context_menu_enabled = false
+virtual_keyboard_enabled = false
+shortcut_keys_enabled = false
+middle_mouse_paste_enabled = false
+selecting_enabled = false
+deselect_on_focus_loss_enabled = false
+drag_and_drop_selection_enabled = false
 
 [node name="HSeparator" type="HSeparator" parent="TabContainer/Shader Mat/ScrollContainer/MarginContainer/VBoxContainer"]
 modulate = Color(1, 1, 1, 0)
