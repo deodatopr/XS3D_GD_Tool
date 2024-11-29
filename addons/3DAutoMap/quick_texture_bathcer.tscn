@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://cwj1co1agaoer"]
+[gd_scene load_steps=7 format=3 uid="uid://cwj1co1agaoer"]
 
 [ext_resource type="Script" path="res://addons/3DAutoMap/AutoMap.gd" id="1_dppo3"]
-[ext_resource type="PackedScene" uid="uid://bacl4oequehqx" path="res://addons/3DAutoMap/shader_parameter.tscn" id="1_go18k"]
+[ext_resource type="Script" path="res://addons/3DAutoMap/AutoMapStandard.gd" id="2_m4a4l"]
+[ext_resource type="Script" path="res://addons/3DAutoMap/AutoMapShader.gd" id="3_uccoi"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_prcn5"]
 
@@ -9,7 +10,7 @@
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5b2h2"]
 
-[node name="[ AUTO MAP ]" type="Control" node_paths=PackedStringArray("ApplyStandardMat", "ApplyShaderMat", "BaseColor", "Roughness", "Metallic", "Normal", "Emission", "Occlusion", "NameTexture", "NumMaterials", "Extension", "SuffBC", "SuffR", "SuffM", "SuffN", "SuffE", "SuffO")]
+[node name="[ AUTO MAP ]" type="Control" node_paths=PackedStringArray("TabOption", "AutoMapStandard", "AutoMapShader")]
 layout_mode = 3
 anchor_right = 0.234
 anchor_bottom = 0.671
@@ -18,23 +19,9 @@ offset_bottom = 0.191986
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_dppo3")
-ApplyStandardMat = NodePath("TabContainer/Standard Mat/ScrollContainer/MarginContainer/VBoxContainer/ApplyStandard")
-ApplyShaderMat = NodePath("TabContainer/Shader Mat/ScrollContainer/MarginContainer/VBoxContainer/ApplyShader")
-BaseColor = NodePath("TabContainer/Standard Mat/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer3/CheckBox")
-Roughness = NodePath("TabContainer/Standard Mat/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer4/CheckBox")
-Metallic = NodePath("TabContainer/Standard Mat/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer5/CheckBox")
-Normal = NodePath("TabContainer/Standard Mat/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer6/CheckBox")
-Emission = NodePath("TabContainer/Standard Mat/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer7/CheckBox")
-Occlusion = NodePath("TabContainer/Standard Mat/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer8/CheckBox")
-NameTexture = NodePath("TabContainer/Standard Mat/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer/LineEdit")
-NumMaterials = NodePath("TabContainer/Standard Mat/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer/OptionButton")
-Extension = NodePath("TabContainer/Standard Mat/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer/OptionButton2")
-SuffBC = NodePath("TabContainer/Standard Mat/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer3/Panel/LineEdit")
-SuffR = NodePath("TabContainer/Standard Mat/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer4/Panel/LineEdit")
-SuffM = NodePath("TabContainer/Standard Mat/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer5/Panel/LineEdit")
-SuffN = NodePath("TabContainer/Standard Mat/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer6/Panel/LineEdit")
-SuffE = NodePath("TabContainer/Standard Mat/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer7/Panel/LineEdit")
-SuffO = NodePath("TabContainer/Standard Mat/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer8/Panel/LineEdit")
+TabOption = NodePath("TabContainer")
+AutoMapStandard = NodePath("TabContainer/Standard Mat")
+AutoMapShader = NodePath("TabContainer/Shader Mat")
 
 [node name="TabContainer" type="TabContainer" parent="."]
 layout_mode = 1
@@ -44,10 +31,31 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_vertical = 3
-current_tab = 0
+current_tab = 1
 
-[node name="Standard Mat" type="Panel" parent="TabContainer"]
+[node name="Standard Mat" type="Panel" parent="TabContainer" node_paths=PackedStringArray("NameTexture", "NumDigits", "Extension", "ExampleName", "ExampleDigits", "ExampleExtension", "BaseColor", "Roughness", "Metallic", "Normal", "Emission", "Occlusion", "SuffBC", "SuffR", "SuffM", "SuffN", "SuffE", "SuffO", "AutoMap")]
+visible = false
 layout_mode = 2
+script = ExtResource("2_m4a4l")
+NameTexture = NodePath("ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer/LineEdit")
+NumDigits = NodePath("ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer/OptionButton")
+Extension = NodePath("ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer/OptionButton2")
+ExampleName = NodePath("ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer9/LineEdit")
+ExampleDigits = NodePath("ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer9/LineEdit2")
+ExampleExtension = NodePath("ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer9/LineEdit3")
+BaseColor = NodePath("ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer3/CheckBox")
+Roughness = NodePath("ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer4/CheckBox")
+Metallic = NodePath("ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer5/CheckBox")
+Normal = NodePath("ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer6/CheckBox")
+Emission = NodePath("ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer7/CheckBox")
+Occlusion = NodePath("ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer8/CheckBox")
+SuffBC = NodePath("ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer3/Panel/LineEdit")
+SuffR = NodePath("ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer4/Panel/LineEdit")
+SuffM = NodePath("ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer5/Panel/LineEdit")
+SuffN = NodePath("ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer6/Panel/LineEdit")
+SuffE = NodePath("ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer7/Panel/LineEdit")
+SuffO = NodePath("ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer8/Panel/LineEdit")
+AutoMap = NodePath("../..")
 metadata/_tab_index = 0
 
 [node name="ScrollContainer" type="ScrollContainer" parent="TabContainer/Standard Mat"]
@@ -100,11 +108,11 @@ size_flags_horizontal = 8
 theme_override_colors/font_color = Color(1, 0.689999, 0.517537, 1)
 selected = 0
 item_count = 4
-popup/item_0/text = "# Mat"
+popup/item_0/text = "# Dgt"
 popup/item_0/disabled = true
 popup/item_0/separator = true
 popup/item_1/text = "NONE"
-popup/item_1/id = 4
+popup/item_1/id = 1
 popup/item_2/text = "0-99"
 popup/item_2/id = 2
 popup/item_3/text = "0-999"
@@ -138,7 +146,7 @@ size_flags_horizontal = 3
 theme_override_colors/font_uneditable_color = Color(0, 0.952577, 0.911258, 1)
 theme_override_font_sizes/font_size = 10
 theme_override_styles/focus = SubResource("StyleBoxEmpty_prcn5")
-text = "Map_Sec4_"
+text = "Name_Texture_"
 alignment = 2
 editable = false
 context_menu_enabled = false
@@ -156,7 +164,7 @@ size_flags_horizontal = 8
 theme_override_colors/font_uneditable_color = Color(1, 0.689999, 0.517537, 1)
 theme_override_font_sizes/font_size = 10
 theme_override_styles/focus = SubResource("StyleBoxEmpty_prcn5")
-text = "1000"
+text = "###"
 alignment = 1
 editable = false
 context_menu_enabled = false
@@ -174,7 +182,7 @@ size_flags_horizontal = 8
 theme_override_colors/font_uneditable_color = Color(1, 0.796926, 0, 1)
 theme_override_font_sizes/font_size = 10
 theme_override_styles/focus = SubResource("StyleBoxEmpty_prcn5")
-text = ".JPG"
+text = ".EXT"
 editable = false
 context_menu_enabled = false
 virtual_keyboard_enabled = false
@@ -438,15 +446,34 @@ modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 theme_override_constants/separation = 10
 
-[node name="ApplyStandard" type="Button" parent="TabContainer/Standard Mat/ScrollContainer/MarginContainer/VBoxContainer"]
+[node name="HBoxContainer10" type="HBoxContainer" parent="TabContainer/Standard Mat/ScrollContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="ApplyStandard" type="Button" parent="TabContainer/Standard Mat/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer10"]
 custom_minimum_size = Vector2(110, 40)
 layout_mode = 2
+size_flags_horizontal = 3
 size_flags_vertical = 8
 text = "APPLY"
 
-[node name="Shader Mat" type="Panel" parent="TabContainer"]
-visible = false
+[node name="ResetStandard" type="Button" parent="TabContainer/Standard Mat/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer10"]
+custom_minimum_size = Vector2(80, 40)
 layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+text = "RESET"
+
+[node name="Shader Mat" type="Panel" parent="TabContainer" node_paths=PackedStringArray("NameTexture", "NumDigits", "Extension", "ExampleName", "ExampleDigits", "ExampleExtension", "AutoMap", "ParametersContainer")]
+layout_mode = 2
+script = ExtResource("3_uccoi")
+NameTexture = NodePath("ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer/LineEdit")
+NumDigits = NodePath("ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer/OptionButton")
+Extension = NodePath("ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer/OptionButton2")
+ExampleName = NodePath("ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer9/LineEdit")
+ExampleDigits = NodePath("ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer9/LineEdit2")
+ExampleExtension = NodePath("ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer9/LineEdit3")
+AutoMap = NodePath("../..")
+ParametersContainer = NodePath("ScrollContainer/MarginContainer/VBoxContainer/Panel/ParametersScrollBox/ParametersContainer")
 metadata/_tab_index = 1
 
 [node name="ScrollContainer" type="ScrollContainer" parent="TabContainer/Shader Mat"]
@@ -496,7 +523,7 @@ popup/item_0/text = "# Mat"
 popup/item_0/disabled = true
 popup/item_0/separator = true
 popup/item_1/text = "NONE"
-popup/item_1/id = 4
+popup/item_1/id = 1
 popup/item_2/text = "0-99"
 popup/item_2/id = 2
 popup/item_3/text = "0-999"
@@ -530,7 +557,7 @@ size_flags_horizontal = 3
 theme_override_colors/font_uneditable_color = Color(0, 0.952577, 0.911258, 1)
 theme_override_font_sizes/font_size = 10
 theme_override_styles/focus = SubResource("StyleBoxEmpty_h0jyk")
-text = "Map_Sec4_"
+text = "Name_Texture"
 alignment = 2
 editable = false
 context_menu_enabled = false
@@ -548,7 +575,7 @@ size_flags_horizontal = 8
 theme_override_colors/font_uneditable_color = Color(1, 0.689999, 0.517537, 1)
 theme_override_font_sizes/font_size = 10
 theme_override_styles/focus = SubResource("StyleBoxEmpty_5b2h2")
-text = "1000"
+text = "###"
 alignment = 1
 editable = false
 context_menu_enabled = false
@@ -566,7 +593,7 @@ size_flags_horizontal = 8
 theme_override_colors/font_uneditable_color = Color(1, 0.796926, 0, 1)
 theme_override_font_sizes/font_size = 10
 theme_override_styles/focus = SubResource("StyleBoxEmpty_5b2h2")
-text = ".JPG"
+text = ".EXT"
 editable = false
 context_menu_enabled = false
 virtual_keyboard_enabled = false
@@ -605,7 +632,7 @@ custom_minimum_size = Vector2(0, 150)
 layout_mode = 2
 size_flags_vertical = 0
 
-[node name="ScrollContainer" type="ScrollContainer" parent="TabContainer/Shader Mat/ScrollContainer/MarginContainer/VBoxContainer/Panel"]
+[node name="ParametersScrollBox" type="ScrollContainer" parent="TabContainer/Shader Mat/ScrollContainer/MarginContainer/VBoxContainer/Panel"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -613,33 +640,9 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/Shader Mat/ScrollContainer/MarginContainer/VBoxContainer/Panel/ScrollContainer"]
+[node name="ParametersContainer" type="VBoxContainer" parent="TabContainer/Shader Mat/ScrollContainer/MarginContainer/VBoxContainer/Panel/ParametersScrollBox"]
 layout_mode = 2
 size_flags_horizontal = 3
-
-[node name="Shader Parameter" parent="TabContainer/Shader Mat/ScrollContainer/MarginContainer/VBoxContainer/Panel/ScrollContainer/VBoxContainer" instance=ExtResource("1_go18k")]
-layout_mode = 2
-
-[node name="Shader Parameter2" parent="TabContainer/Shader Mat/ScrollContainer/MarginContainer/VBoxContainer/Panel/ScrollContainer/VBoxContainer" instance=ExtResource("1_go18k")]
-layout_mode = 2
-
-[node name="Shader Parameter3" parent="TabContainer/Shader Mat/ScrollContainer/MarginContainer/VBoxContainer/Panel/ScrollContainer/VBoxContainer" instance=ExtResource("1_go18k")]
-layout_mode = 2
-
-[node name="Shader Parameter4" parent="TabContainer/Shader Mat/ScrollContainer/MarginContainer/VBoxContainer/Panel/ScrollContainer/VBoxContainer" instance=ExtResource("1_go18k")]
-layout_mode = 2
-
-[node name="Shader Parameter5" parent="TabContainer/Shader Mat/ScrollContainer/MarginContainer/VBoxContainer/Panel/ScrollContainer/VBoxContainer" instance=ExtResource("1_go18k")]
-layout_mode = 2
-
-[node name="Shader Parameter6" parent="TabContainer/Shader Mat/ScrollContainer/MarginContainer/VBoxContainer/Panel/ScrollContainer/VBoxContainer" instance=ExtResource("1_go18k")]
-layout_mode = 2
-
-[node name="Shader Parameter7" parent="TabContainer/Shader Mat/ScrollContainer/MarginContainer/VBoxContainer/Panel/ScrollContainer/VBoxContainer" instance=ExtResource("1_go18k")]
-layout_mode = 2
-
-[node name="Shader Parameter8" parent="TabContainer/Shader Mat/ScrollContainer/MarginContainer/VBoxContainer/Panel/ScrollContainer/VBoxContainer" instance=ExtResource("1_go18k")]
-layout_mode = 2
 
 [node name="HSeparator2" type="HSeparator" parent="TabContainer/Shader Mat/ScrollContainer/MarginContainer/VBoxContainer"]
 modulate = Color(1, 1, 1, 0)
@@ -659,8 +662,32 @@ modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 theme_override_constants/separation = 10
 
-[node name="ApplyShader" type="Button" parent="TabContainer/Shader Mat/ScrollContainer/MarginContainer/VBoxContainer"]
+[node name="HBoxContainer3" type="HBoxContainer" parent="TabContainer/Shader Mat/ScrollContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="ApplyShader" type="Button" parent="TabContainer/Shader Mat/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer3"]
 custom_minimum_size = Vector2(110, 40)
 layout_mode = 2
+size_flags_horizontal = 3
 size_flags_vertical = 8
 text = "APPLY"
+
+[node name="ResetShader" type="Button" parent="TabContainer/Shader Mat/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer3"]
+custom_minimum_size = Vector2(80, 40)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+text = "RESET"
+
+[connection signal="text_changed" from="TabContainer/Standard Mat/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer/LineEdit" to="." method="_on_name_texture_text_changed"]
+[connection signal="item_selected" from="TabContainer/Standard Mat/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer/OptionButton" to="." method="_on_digits_number_item_selected"]
+[connection signal="item_selected" from="TabContainer/Standard Mat/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer/OptionButton2" to="." method="_on_extension_item_selected"]
+[connection signal="pressed" from="TabContainer/Standard Mat/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer10/ApplyStandard" to="TabContainer/Standard Mat" method="_on_apply_standard_pressed"]
+[connection signal="pressed" from="TabContainer/Standard Mat/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer10/ResetStandard" to="." method="_on_reset_standard_pressed"]
+[connection signal="text_changed" from="TabContainer/Shader Mat/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer/LineEdit" to="." method="_on_name_texture_text_changed"]
+[connection signal="item_selected" from="TabContainer/Shader Mat/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer/OptionButton" to="." method="_on_digits_number_item_selected"]
+[connection signal="item_selected" from="TabContainer/Shader Mat/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer/OptionButton2" to="." method="_on_extension_item_selected"]
+[connection signal="sort_children" from="TabContainer/Shader Mat/ScrollContainer/MarginContainer/VBoxContainer/Panel/ParametersScrollBox/ParametersContainer" to="TabContainer/Shader Mat" method="_on_parameters_container_sort_children"]
+[connection signal="pressed" from="TabContainer/Shader Mat/ScrollContainer/MarginContainer/VBoxContainer/AddElement" to="TabContainer/Shader Mat" method="_on_add_parameter_pressed"]
+[connection signal="pressed" from="TabContainer/Shader Mat/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer3/ApplyShader" to="TabContainer/Shader Mat" method="_on_apply_shader_pressed"]
+[connection signal="pressed" from="TabContainer/Shader Mat/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer3/ResetShader" to="." method="_on_reset_standard_pressed"]

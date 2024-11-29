@@ -1,0 +1,12 @@
+[gd_resource type="ShaderMaterial" load_steps=4 format=3 uid="uid://be2vxnla6n7do"]
+
+[ext_resource type="Shader" uid="uid://crnyarkud6k7j" path="res://Materials/Test2_Shader.tres" id="1_kxjxv"]
+[ext_resource type="Texture2D" uid="uid://b5tiu8q4c8vdu" path="res://Materials/Map_Calle_AsfaltoV3_01_BC.jpg" id="2_xdc1t"]
+[ext_resource type="Texture2D" uid="uid://be1by2rv8ljtg" path="res://Materials/Map_Calle_AsfaltoV3_01_N.jpg" id="3_fxiya"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_kxjxv")
+shader_parameter/Color = ExtResource("2_xdc1t")
+shader_parameter/Roughness = ExtResource("2_xdc1t")
+shader_parameter/Normal = ExtResource("3_fxiya")

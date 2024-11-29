@@ -1,38 +1,44 @@
 @tool
 extends Control
+class_name AutoMap
 
-@export var ApplyStandardMat : Button
-@export var ApplyShaderMat : Button
-@export var BaseColor : CheckBox
-@export var Roughness : CheckBox
-@export var Metallic : CheckBox
-@export var Normal : CheckBox
-@export var Emission : CheckBox
-@export var Occlusion : CheckBox
-@export var NameTexture : LineEdit
-@export var NumMaterials : OptionButton
-@export var Extension : OptionButton
-@export var SuffBC : LineEdit
-@export var SuffR : LineEdit
-@export var SuffM : LineEdit
-@export var SuffN : LineEdit
-@export var SuffE : LineEdit
-@export var SuffO : LineEdit
+@export var TabOption : TabContainer
+@export var AutoMapStandard : AutoMapStandard
+@export var AutoMapShader : AutoMapShader
 
 var window : Window
-var Textures : Dictionary
 var fileSystemSelPath :PackedStringArray
 
-func _ready():
-	ApplyStandardMat.connect("button_down",_on_apply_standard_pressed)
-
-func _on_apply_standard_pressed():
-	#print("pressed")
+func ComfirmationWindow(NameTexture : LineEdit, NumDigits : OptionButton, Extension : OptionButton)->Window:
+	fileSystemSelPath.clear()
+	fileSystemSelPath = EditorInterface.get_selected_paths()
+	var MaterialsSelected : int
+	
+	for path in fileSystemSelPath:
+		if path.get_extension() == "tres":
+			MaterialsSelected += 1
+			
+	if NameTexture.text.is_empty():
+		WarningMessage("Type the name of the texture")
+		return null
+		
+	if NumDigits.get_selected_id() == 0:
+		WarningMessage("Select the number of digits")
+		return null
+		
+	if Extension.get_selected_id() == 0:
+		WarningMessage("Select the extension")
+		return null
+			
+	if MaterialsSelected == 0:
+		WarningMessage("Select at lest 1 Material")
+		return null
+	
 	if window != null:
 		window.grab_focus()
 		
 	var dialog = Label.new()
-	dialog.text = "Sure you want apply?"
+	dialog.text = "Selected " + str(MaterialsSelected) + " Material(s)\n Do you want apply?"
 	dialog.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	dialog.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 	window = ConfirmationDialog.new()
@@ -43,85 +49,79 @@ func _on_apply_standard_pressed():
 	window.add_child(dialog)
 	window.about_to_popup
 	
-	window.connect("confirmed",_applayTextures)
-	
-func _applayTextures():
-	fileSystemSelPath.clear()
-	
-	fileSystemSelPath = EditorInterface.get_selected_paths()
-	
-	for path in fileSystemSelPath:
-		if path.get_extension() == "tres":
-			var resource = ResourceLoader.load(path)
-			AutoAssingTextures(resource, path.get_file())
+	return window
 
-func AutoAssingTextures(MaterialFile : StandardMaterial3D, FileName : String):
-	Textures.clear()
-	
-	var NameStruct = NameTexture.text + ("" if NumMaterials.get_selected_id() <= 1 else GetNumberOfMaterial(FileName, 2 if NumMaterials.get_selected_id() == 2 else 3))
-	FindTextures("res://", NameStruct)
-	
-	print(Textures)
-	if BaseColor.button_pressed:
-		MaterialFile.albedo_texture = Textures[SuffBC.text]
-	if Roughness.button_pressed:
-		MaterialFile.roughness_texture = Textures[SuffR.text]
-	if Metallic.button_pressed:
-		MaterialFile.metallic_texture = Textures[SuffM.text]
-	if Normal.button_pressed:
-		MaterialFile.normal_enabled = true
-		MaterialFile.normal_texture = Textures[SuffN.text]
-	if Emission.button_pressed:
-		MaterialFile.emission_enabled = true
-		MaterialFile.emission_texture = Textures[SuffE.text]
-	if Occlusion.button_pressed:
-		MaterialFile.ao_enabled = true
-		MaterialFile.ao_texture = Textures[SuffO.text]
-	
-func GetNumberOfMaterial(MaterialName : String, NumUnits : int)->String:
-	return MaterialName.split(".")[0].right(NumUnits)
-	
-func FindTextures(path : String, nameStruct : String):
-	var dir = DirAccess.open(path)
-	
-	if DirAccess.get_open_error() != OK:
-		print("Failed to open directory: ", path)
-		return
+func WarningMessage(Message : String):
+	if window != null:
+		window.grab_focus()
 		
-	dir.list_dir_begin()
+	var dialog = Label.new()
+	dialog.text = Message
+	dialog.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	dialog.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	window = AcceptDialog.new()
+	window.size = Vector2i(200, 100)
 	
-	var file_or_dir = dir.get_next()
-	while file_or_dir != "":
-		if file_or_dir.begins_with("."):
-			file_or_dir = dir.get_next()
-			continue
-		
-		var fullPath = path.path_join(file_or_dir)
-		if dir.current_is_dir():
-			FindTextures(fullPath, nameStruct)
+	EditorInterface.popup_dialog_centered(window)
+	
+	window.add_child(dialog)
+	window.about_to_popup
+
+func _on_name_texture_text_changed(new_text):
+	if TabOption.current_tab == 0:
+		if new_text == "":
+			AutoMapStandard.ExampleName.text = "Name_Texture"
 		else:
-			if file_or_dir.contains(nameStruct) and file_or_dir.get_extension().to_upper() == Extension.get_item_text(Extension.get_selected_id()):
-				var FileSplit = file_or_dir.erase(0, nameStruct.length()).split(".")
-				var Suffix : String
-				if FileSplit[0] == SuffBC.text:
-					Suffix = SuffBC.text
-				elif FileSplit[0] == SuffR.text:
-					Suffix = SuffR.text
-				elif FileSplit[0] == SuffM.text:
-					Suffix = SuffM.text
-				elif FileSplit[0] == SuffN.text:
-					Suffix = SuffN.text
-				elif FileSplit[0] == SuffE.text:
-					Suffix = SuffE.text
-				elif FileSplit[0] == SuffO.text:
-					Suffix = SuffO.text
-					
-				if ResourceLoader.exists(fullPath):
-					var newTexture = ResourceLoader.load(fullPath)
-					Textures[Suffix] = newTexture
+			AutoMapStandard.ExampleName.text = new_text
+	else:
+		if new_text == "":
+			AutoMapShader.ExampleName.text = "Name_Texture"
+		else:
+			AutoMapShader.ExampleName.text = new_text
+
+
+func _on_digits_number_item_selected(index):
+	if TabOption.current_tab == 0:
+		if index == 1:
+			AutoMapStandard.ExampleDigits.text = ""
+		elif index == 2:
+			AutoMapStandard.ExampleDigits.text = "01"
+		elif index == 3:
+			AutoMapStandard.ExampleDigits.text = "001"
+	else:
+		if index == 1:
+			AutoMapShader.ExampleDigits.text = ""
+		elif index == 2:
+			AutoMapShader.ExampleDigits.text = "01"
+		elif index == 3:
+			AutoMapShader.ExampleDigits.text = "001"
+
+
+func _on_extension_item_selected(index):
+	if TabOption.current_tab == 0:
+		AutoMapStandard.ExampleExtension.text = "." + AutoMapStandard.Extension.get_item_text(index).to_lower()
+	else:
+		AutoMapShader.ExampleExtension.text = "." + AutoMapShader.Extension.get_item_text(index).to_lower()
+
+
+func _on_reset_standard_pressed():
+	if TabOption.current_tab == 0:
+		AutoMapStandard.NameTexture.text = ""
+		AutoMapStandard.NumDigits.selected = 0
+		AutoMapStandard.Extension.selected = 0
 		
-		file_or_dir = dir.get_next()
+		AutoMapStandard.ExampleName.text = "Name_Texture"
+		AutoMapStandard.ExampleDigits.text = "###"
+		AutoMapStandard.ExampleExtension.text = ".EXT"
 		
-	dir.list_dir_end()
-	
-	
+		AutoMapStandard._on_reset_standard_pressed()
+	else:
+		AutoMapShader.NameTexture.text = ""
+		AutoMapShader.NumDigits.selected = 0
+		AutoMapShader.Extension.selected = 0
+		
+		AutoMapShader.ExampleName.text = "Name_Texture"
+		AutoMapShader.ExampleDigits.text = "###"
+		AutoMapShader.ExampleExtension.text = ".EXT"
+		
+		AutoMapShader._on_reset_standard_pressed()

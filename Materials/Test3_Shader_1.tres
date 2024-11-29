@@ -1,0 +1,71 @@
+[gd_resource type="VisualShader" load_steps=9 format=3 uid="uid://c6wso63o6w36r"]
+
+[ext_resource type="Texture2D" uid="uid://ibg54bfaucde" path="res://Materials/Map_Calle_AsfaltoV1_BC.jpg" id="1_70j5a"]
+[ext_resource type="Texture2D" uid="uid://b4g7lqhhq0vr4" path="res://Materials/Map_Calle_AsfaltoV1_N.jpg" id="2_oej4b"]
+
+[sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_sp8e6"]
+texture = ExtResource("1_70j5a")
+
+[sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_8xwf6"]
+texture = ExtResource("2_oej4b")
+
+[sub_resource type="VisualShaderNodeTexture2DParameter" id="VisualShaderNodeTexture2DParameter_j2rry"]
+parameter_name = "Color"
+
+[sub_resource type="VisualShaderNodeTexture2DParameter" id="VisualShaderNodeTexture2DParameter_grlap"]
+parameter_name = "Normal"
+
+[sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_7kv3g"]
+texture = ExtResource("1_70j5a")
+
+[sub_resource type="VisualShaderNodeTexture2DParameter" id="VisualShaderNodeTexture2DParameter_wqfx3"]
+parameter_name = "Roughness"
+
+[resource]
+code = "shader_type spatial;
+render_mode blend_mix, depth_draw_opaque, cull_back, diffuse_lambert, specular_schlick_ggx;
+
+uniform sampler2D Color;
+uniform sampler2D tex_frg_2;
+uniform sampler2D Roughness;
+uniform sampler2D tex_frg_6;
+uniform sampler2D Normal;
+uniform sampler2D tex_frg_3;
+
+
+
+void fragment() {
+// Texture2D:2
+	vec4 n_out2p0 = texture(tex_frg_2, UV);
+
+
+// Texture2D:6
+	vec4 n_out6p0 = texture(tex_frg_6, UV);
+
+
+// Texture2D:3
+	vec4 n_out3p0 = texture(tex_frg_3, UV);
+
+
+// Output:0
+	ALBEDO = vec3(n_out2p0.xyz);
+	ROUGHNESS = n_out6p0.x;
+	NORMAL = vec3(n_out3p0.xyz);
+
+
+}
+"
+graph_offset = Vector2(-458.051, 356.182)
+nodes/fragment/2/node = SubResource("VisualShaderNodeTexture_sp8e6")
+nodes/fragment/2/position = Vector2(125.968, 138.972)
+nodes/fragment/3/node = SubResource("VisualShaderNodeTexture_8xwf6")
+nodes/fragment/3/position = Vector2(120, 700)
+nodes/fragment/4/node = SubResource("VisualShaderNodeTexture2DParameter_j2rry")
+nodes/fragment/4/position = Vector2(-200, 160)
+nodes/fragment/5/node = SubResource("VisualShaderNodeTexture2DParameter_grlap")
+nodes/fragment/5/position = Vector2(-180, 700)
+nodes/fragment/6/node = SubResource("VisualShaderNodeTexture_7kv3g")
+nodes/fragment/6/position = Vector2(140, 420)
+nodes/fragment/7/node = SubResource("VisualShaderNodeTexture2DParameter_wqfx3")
+nodes/fragment/7/position = Vector2(-180, 420)
+nodes/fragment/connections = PackedInt32Array(2, 0, 0, 0, 3, 0, 0, 8, 4, 0, 2, 2, 5, 0, 3, 2, 6, 0, 0, 3, 7, 0, 6, 2)
