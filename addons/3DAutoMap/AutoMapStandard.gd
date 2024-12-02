@@ -28,34 +28,28 @@ class_name AutoMapStandard
 
 var window : Window
 var Textures : Dictionary
+var AppliedTextures : int = 0
 
 func _on_apply_standard_pressed():
 	window = AutoMap.ComfirmationWindow(NameTexture, NumDigits, Extension)
+	
+	if !BaseColor.button_pressed and !Roughness.button_pressed and !Metallic.button_pressed and !Normal.button_pressed and !Emission.button_pressed and !Occlusion.button_pressed:
+		AutoMap.WarningMessage("Select at least one map connection")
+		return
 	
 	if window != null:
 		window.connect("confirmed",_applyTextures)
 	
 func _applyTextures():
+	AppliedTextures = 0
+	
 	for path in AutoMap.fileSystemSelPath:
 		if path.get_extension() == "tres":
 			var resource = ResourceLoader.load(path)
 			AutoAssingTextures(resource, path.get_file())
-
-func WarningMessage(Message : String):
-	if window != null:
-		window.grab_focus()
-		
-	var dialog = Label.new()
-	dialog.text = Message
-	dialog.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	dialog.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-	window = AcceptDialog.new()
-	window.size = Vector2i(200, 100)
-	
-	EditorInterface.popup_dialog_centered(window)
-	
-	window.add_child(dialog)
-	window.about_to_popup
+			
+	if AppliedTextures == 0:
+		AutoMap.WarningMessage("No textures were found with the strucutre of the name")
 
 func AutoAssingTextures(MaterialFile : StandardMaterial3D, FileName : String):
 	Textures.clear()
@@ -68,24 +62,30 @@ func AutoAssingTextures(MaterialFile : StandardMaterial3D, FileName : String):
 	
 	if BaseColor.button_pressed and Textures.has(SuffBC.text):
 		MaterialFile.albedo_texture = Textures[SuffBC.text]
+		AppliedTextures += 1
 		
 	if Roughness.button_pressed and Textures.has(SuffR.text):
 		MaterialFile.roughness_texture = Textures[SuffR.text]
+		AppliedTextures += 1
 		
 	if Metallic.button_pressed and Textures.has(SuffM.text):
 		MaterialFile.metallic_texture = Textures[SuffM.text]
+		AppliedTextures += 1
 		
 	if Normal.button_pressed and Textures.has(SuffN.text):
 		MaterialFile.normal_enabled = true
 		MaterialFile.normal_texture = Textures[SuffN.text]
+		AppliedTextures += 1
 		
 	if Emission.button_pressed and Textures.has(SuffE.text):
 		MaterialFile.emission_enabled = true
 		MaterialFile.emission_texture = Textures[SuffE.text]
+		AppliedTextures += 1
 		
 	if Occlusion.button_pressed and Textures.has(SuffO.text):
 		MaterialFile.ao_enabled = true
 		MaterialFile.ao_texture = Textures[SuffO.text]
+		AppliedTextures += 1
 	
 func GetDigitsOfMaterial(MaterialName : String, NumUnits : int)->String:
 	return MaterialName.split(".")[0].right(NumUnits)

@@ -31,7 +31,7 @@ func ComfirmationWindow(NameTexture : LineEdit, NumDigits : OptionButton, Extens
 		return null
 			
 	if MaterialsSelected == 0:
-		WarningMessage("Select at lest 1 Material")
+		WarningMessage("Select at least 1 Material")
 		return null
 	
 	if window != null:

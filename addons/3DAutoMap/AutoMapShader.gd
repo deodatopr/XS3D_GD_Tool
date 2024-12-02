@@ -19,6 +19,7 @@ const SHADER_PARAMETER = preload('uid://bacl4oequehqx')
 var window : Window
 var Textures : Dictionary
 var ShaderParameters : Array[ShaderParameter] =[]
+var AppliedTextures : int = 0
 
 func _on_apply_shader_pressed():
 	window = AutoMap.ComfirmationWindow(NameTexture, NumDigits, Extension)
@@ -27,14 +28,19 @@ func _on_apply_shader_pressed():
 		window.connect("confirmed",_applyTextures)
 		
 func _applyTextures():
+	AppliedTextures = 0
+	
 	for path in AutoMap.fileSystemSelPath:
 		if path.get_extension() == "tres":
 			var resource = ResourceLoader.load(path)
 			AutoAssingTextures(resource, path.get_file())
 			
+	if AppliedTextures == 0:
+		AutoMap.WarningMessage("No textures were found with the strucutre of the name")
+			
 func AutoAssingTextures(MaterialFile : ShaderMaterial, FileName : String):
 	Textures.clear()
-
+	
 	var DigitText : String = ""
 	if NumDigits.get_selected_id() > 1:
 		DigitText = GetDigitsOfMaterial(FileName, NumDigits.get_selected_id())
@@ -44,6 +50,7 @@ func AutoAssingTextures(MaterialFile : ShaderMaterial, FileName : String):
 	for Param in ShaderParameters:
 		for Suffix in Textures.keys():
 			if Param.TextureSuff.text == Suffix:
+				AppliedTextures += 1
 				MaterialFile.set_shader_parameter(Param.ParameterName.text, Textures[Suffix])
 	
 func GetDigitsOfMaterial(MaterialName : String, NumUnits : int)->String:
