@@ -38,7 +38,7 @@ func ComfirmationWindow(NameTexture : LineEdit, NumDigits : OptionButton, Extens
 		window.grab_focus()
 		
 	var dialog = Label.new()
-	dialog.text = "Selected " + str(MaterialsSelected) + " Material(s)\n Do you want apply?"
+	dialog.text = "Selected " + str(MaterialsSelected) + " Material(s)\n Do you want to apply?"
 	dialog.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	dialog.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 	window = ConfirmationDialog.new()

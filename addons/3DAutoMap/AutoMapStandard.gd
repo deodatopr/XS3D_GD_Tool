@@ -31,11 +31,11 @@ var Textures : Dictionary
 var AppliedTextures : int = 0
 
 func _on_apply_standard_pressed():
-	window = AutoMap.ComfirmationWindow(NameTexture, NumDigits, Extension)
-	
 	if !BaseColor.button_pressed and !Roughness.button_pressed and !Metallic.button_pressed and !Normal.button_pressed and !Emission.button_pressed and !Occlusion.button_pressed:
 		AutoMap.WarningMessage("Select at least one map connection")
 		return
+	
+	window = AutoMap.ComfirmationWindow(NameTexture, NumDigits, Extension)
 	
 	if window != null:
 		window.connect("confirmed",_applyTextures)
